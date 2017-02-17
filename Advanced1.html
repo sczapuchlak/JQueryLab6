@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+        .bold {                 /* A style for elements with the bold class */
+            font-weight: bold;
+        }
+    </style>
+
+
+
+</head>
+<body>
+<h1>The List of Things I Don't Care About</h1>
+<h2>Once you complete the item, please click it to make it bold , so you know it is complete</h2>
+<script>
+    $(function() {
+
+    //Add text to list of no cares
+        $("body").append("<input type='text' id='inputbox'>");
+        $("body").append("<button id=AddToListButton> Add to the list I don't care about</button>");
+        $("body").append("<ul id= noCaresList></ul>");
+        $("#AddToListButton").click(function () {
+           $("#noCaresList").append("<li>" + $('#inputbox').val()+"</li>");
+            $("li").click(function(){
+                // For the element clicked, add the bold class if not present
+                // remove the bold class if it is present
+                $(this).toggleClass("bold");
+            });
+
+        });
+        // Select all the li elements, add click listener
+     //End of ready function
+
+
+
+
+
+    });
+</script>
+
+
+
+</body>
+</html>
