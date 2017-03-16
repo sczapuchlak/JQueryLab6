@@ -1,0 +1,36 @@
+.not_done {
+    font-weight: bold;
+}
+
+.complete {
+    color: hotpink;
+    text-decoration: line-through;
+    font-style: italic;
+
+}
+
+li {
+    font-size: 18px;
+    font-family: "Trebuchet MS";
+}
+
+button {
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    font-family: "Georgia";
+    border: 2px solid black;
+    padding: 3px;
+}
+
+h1 {
+    font-family: "Arial Black";
+    font-size: 42px;
+}

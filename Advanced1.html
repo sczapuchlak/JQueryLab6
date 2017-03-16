@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <title>Advanced 1</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <style>
-        .bold {                 /* A style for elements with the bold class */
-            font-weight: bold;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
 
 </head>
@@ -21,29 +15,65 @@
     $(function() {
 
     //Add text to list of no cares
-        $("body").append("<input type='text' id='inputbox'>");
-        $("body").append("<button id=AddToListButton> Add to the list I don't care about</button>");
-        $("body").append("<ul id= noCaresList></ul>");
-        $("#AddToListButton").click(function () {
-           $("#noCaresList").append("<li>" + $('#inputbox').val()+"</li>");
-            $("li").click(function(){
-                // For the element clicked, add the bold class if not present
-                // remove the bold class if it is present
-                $(this).toggleClass("bold");
-            });
+        $("body").append("<h1>The List of No F's That I Now Care About</h1>");
+        $("body").append("<input type='text' id='inputbox'>" + "<br><br>");
+        $("body").append("<button id='myButton'>Add Thing You Don't Care About</button>");
+        $("body").append("<button id='clearButton'>Delete List</button>");
+        $("body").append("<ul id='myList'></ul>");
+        $("body").append("<table id='myTable'><tr><th scope='col'>Item</th><th scope='col'>Date</th></tr></table>");
 
+
+// Button click event listener.
+        $("#myButton").click(function(){
+            // Stores the textbox's value.
+            var input = $("#inputbox").val();
+            // Checks that the textbox is not empty before continuing.
+            if (input != "") {
+                // Adds new li element to the list with the textbox's value.
+                $("#myList").append("<li class='not_done'>" + input + "</li>");
+                // Clears textbox.
+                $("#inputbox").val("");
+            }
         });
-        // Select all the li elements, add click listener
-     //End of ready function
 
-
-
-
-
-    });
+// Clear click event listener.
+        $("#clearButton").click(function(){
+            // Captures all elements with the complete class.
+            var items = $(".complete");
+            // Loops through captured elements.
+            for (var x = 0; x < items.length; x++) {
+                // Retrieves each element's secret data property containing
+                // the date object created upon completion.
+                var rawDate = $(items[x]).data('date');
+                // Creates a formatted date string with zero paddings for single digits.
+                var doneDate = ("0" + (rawDate.getMonth()+1)).slice(-2) + "/" + ("0" + rawDate.getDate()).slice(-2) + "/" + rawDate.getFullYear();
+                // Stores element's text value as a precaution.
+                var theText = items[x].innerHTML;
+                // Makes all captured elements fadeout slowly.
+                $(".complete").fadeOut(5000);
+                // Creates a new tr element and adds it to the table element with the
+                // text value and date string.
+                $("#myTable").append("<tr><td>" + theText + "</td><td>" + doneDate + "</td></tr>");
+            }
+            // Removes all captured elements from memory and the list (if still there).
+            $(".complete").remove();
+        });
+// List click event listener.
+        $("#myList").click(function(event){
+            // Determines which element was clicked.
+            var whatEvent = event.target;
+            // Changes the clicked element's class.
+            $(whatEvent).toggleClass("complete");
+            // Checks if the clicked element has a date object attached to it
+            // already and adds new one if not present.
+            if (!$(whatEvent).data("date")) {
+                $(whatEvent).data({"date": new Date()});
+            }
+        });
+    })
+    //Worked with Mark Fox on this assignment
 </script>
-
-
 
 </body>
 </html>
+
